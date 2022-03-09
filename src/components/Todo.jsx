@@ -13,13 +13,13 @@ function Todo({ todos }) {
   return (
     <List className="todo-list">
       {todos.map((todo) => (
-        <ListItem key={todo}>
+        <ListItem key={todo.timestamp}>
           <ListItemAvatar>
             <Avatar>
               <Icon />
             </Avatar>
           </ListItemAvatar>
-          <ListItemText primary={todo} secondary="Dummy deadline ⏰" />
+          <ListItemText primary={todo.title} secondary="Dummy deadline ⏰" />
         </ListItem>
       ))}
     </List>

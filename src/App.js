@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Button, FormControl, Input, InputLabel } from "@material-ui/core";
 import Todo from "./components/Todo";
-import { getTodos } from "./firebase";
+import db from "./firebase";
+import { firestore } from "firebase";
 import "./css/App.css";
 
 function App() {
@@ -9,20 +10,28 @@ function App() {
   const [input, setInput] = useState("");
 
   useEffect(() => {
-    getTodos()
-      .then((data) => setTodos([...todos, ...data]))
-      .catch(() => setTodos([]));
+    db.collection("todos")
+      .orderBy("timestamp", "desc")
+      .onSnapshot((snapshot) => {
+        setTodos(snapshot.docs.map((doc) => doc.data()));
+      });
   }, []);
 
   const addTodo = (event) => {
     event.preventDefault();
-    setTodos([...todos, input.trim()]);
+    const title = input.trim();
+    db.collection("todos").add({
+      title,
+      timestamp: firestore.FieldValue.serverTimestamp(),
+    });
+
+    setTodos([...todos, title]);
     setInput("");
   };
 
   return (
     <div className="App">
-      <h1>TODO App</h1>
+      <h1>TODO List App 🚀</h1>
       <form>
         <FormControl>
           <InputLabel>✔️ Write a TODO</InputLabel>
@@ -31,7 +40,6 @@ function App() {
             onChange={(event) => setInput(event.currentTarget.value)}
           />
         </FormControl>
-
         <Button
           type="submit"
           onClick={addTodo}

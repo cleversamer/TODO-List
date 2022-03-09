@@ -1,7 +1,6 @@
-import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs } from "firebase/firestore/lite";
+import { initializeApp } from "firebase";
 
-const firebaseConfig = {
+const config = {
   apiKey: "AIzaSyBmV75yNWmhttDb6fwFh5-efeFV1YFNVNM",
   authDomain: "todo-83fc4.firebaseapp.com",
   projectId: "todo-83fc4",
@@ -11,13 +10,8 @@ const firebaseConfig = {
   measurementId: "G-4BE8BRKTC1",
 };
 
-const app = initializeApp(firebaseConfig);
+const app = initializeApp(config);
 
-const db = getFirestore(app);
+const db = app.firestore();
 
-export const getTodos = async () => {
-  const todosCol = collection(db, "todos");
-  const todosSnapshot = await getDocs(todosCol);
-  const todos = todosSnapshot.docs.map((doc) => doc.data().todo);
-  return todos;
-};
+export default db;
