@@ -15,4 +15,9 @@ const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
 
-export default db;
+export const getTodos = async () => {
+  const todosCol = collection(db, "todos");
+  const todosSnapshot = await getDocs(todosCol);
+  const todos = todosSnapshot.docs.map((doc) => doc.data().todo);
+  return todos;
+};

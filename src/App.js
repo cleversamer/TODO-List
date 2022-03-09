@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, FormControl, Input, InputLabel } from "@material-ui/core";
 import Todo from "./components/Todo";
-import db from "./firebase";
+import { getTodos } from "./firebase";
 import "./css/App.css";
 
 function App() {
@@ -9,8 +9,10 @@ function App() {
   const [input, setInput] = useState("");
 
   useEffect(() => {
-    //
-  }, [input]);
+    getTodos()
+      .then((data) => setTodos([...todos, ...data]))
+      .catch(() => setTodos([]));
+  }, []);
 
   const addTodo = (event) => {
     event.preventDefault();
