@@ -1,25 +1,20 @@
 import React from "react";
 import "../css/Todo.css";
-import {
-  Avatar,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
-  Icon,
-} from "@material-ui/core";
+import { Button, List, ListItem, ListItemText } from "@material-ui/core";
 
-function Todo({ todos }) {
+function Todo({ todos, onDelete }) {
   return (
     <List className="todo-list">
       {todos.map((todo) => (
-        <ListItem key={todo.timestamp}>
-          <ListItemAvatar>
-            <Avatar>
-              <Icon />
-            </Avatar>
-          </ListItemAvatar>
+        <ListItem key={todo.id}>
           <ListItemText primary={todo.title} secondary="Dummy deadline ⏰" />
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => onDelete(todo.id)}
+          >
+            Delete Me
+          </Button>
         </ListItem>
       ))}
     </List>

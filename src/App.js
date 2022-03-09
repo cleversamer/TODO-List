@@ -13,9 +13,17 @@ function App() {
     db.collection("todos")
       .orderBy("timestamp", "desc")
       .onSnapshot((snapshot) => {
-        setTodos(snapshot.docs.map((doc) => doc.data()));
+        setTodos(
+          snapshot.docs.map((doc) => {
+            return { id: doc.id, title: doc.data().title };
+          })
+        );
       });
   }, []);
+
+  const handleDelete = (todoId) => {
+    db.collection("todos").doc(todoId).delete();
+  };
 
   const addTodo = (event) => {
     event.preventDefault();
@@ -34,7 +42,7 @@ function App() {
       <h1>TODO List App 🚀</h1>
       <form>
         <FormControl>
-          <InputLabel>✔️ Write a TODO</InputLabel>
+          <InputLabel>✅ Write a TODO</InputLabel>
           <Input
             value={input}
             onChange={(event) => setInput(event.currentTarget.value)}
@@ -51,7 +59,7 @@ function App() {
         </Button>
       </form>
 
-      <Todo todos={todos} />
+      <Todo todos={todos} onDelete={handleDelete} />
     </div>
   );
 }
