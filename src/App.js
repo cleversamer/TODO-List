@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Button, FormControl, Input, InputLabel } from "@material-ui/core";
+import {
+  Button,
+  FormControl,
+  Input,
+  InputLabel,
+  Link,
+} from "@material-ui/core";
 import Todo from "./components/Todo";
 import db from "./firebase";
 import { firestore } from "firebase";
@@ -40,7 +46,13 @@ function App() {
   return (
     <div className="App">
       <h1>TODO List App 🚀</h1>
-      <form>
+      <p>
+        Made With ❤️ By{" "}
+        <Link href="https://www.twitter.com/ssadawi__" target="__blank">
+          Samer A.
+        </Link>
+      </p>
+      <form className="input-box">
         <FormControl>
           <InputLabel>✅ Write a TODO</InputLabel>
           <Input
@@ -49,6 +61,7 @@ function App() {
           />
         </FormControl>
         <Button
+          style={{ marginLeft: 10, marginTop: 10 }}
           type="submit"
           onClick={addTodo}
           variant="contained"

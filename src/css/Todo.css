@@ -1,3 +1,20 @@
 .todo-list {
-  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.todo-list-item {
+  /* width: auto; */
+}
+
+@media screen and (max-width: 1144px) {
+  .todo-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .todo-list {
+    grid-template-columns: 1fr;
+  }
 }
