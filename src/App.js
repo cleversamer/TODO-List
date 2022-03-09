@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, FormControl, Input, InputLabel } from "@material-ui/core";
-import "./App.css";
 import Todo from "./components/Todo";
+import db from "./firebase";
+import "./css/App.css";
 
 function App() {
-  const [todos, setTodos] = useState([
-    "Take dogs for a walk",
-    "Take the rubbish out",
-    "Qazi wants to livestream today",
-  ]);
+  const [todos, setTodos] = useState([]);
   const [input, setInput] = useState("");
+
+  useEffect(() => {
+    //
+  }, [input]);
 
   const addTodo = (event) => {
     event.preventDefault();
