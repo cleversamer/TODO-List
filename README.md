@@ -39,7 +39,7 @@ This app includes these dependencies:
 * If you want to update the NPM packages used in the project, make sure that you will face a runtime error after doing it.
 
 ## Authors
-Authored by [Samer A.](https://www.twitter.com/ssadawi__)
+Authored by [Samer A.](https://cleversamer.web.app/)
 
 ## Version History
 * 1.0
